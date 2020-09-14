@@ -1,0 +1,15 @@
+td {
+  border: 1px solid #cccccc;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #e9e4f0;
+  color: black;
+}
+
+tr:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

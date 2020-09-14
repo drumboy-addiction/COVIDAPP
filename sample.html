@@ -1,0 +1,145 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">  
+
+        <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="public/css/style.css" />
+	<link rel="stylesheet" href="public/css/tablestyle.css">
+		<script>
+
+  			// Fetching json File
+
+        	fetch('https://covidpatientnodejs.herokuapp.com/covid')
+        	.then( (apidata) => {
+        		//console.log(apidata);
+        		return apidata.json();
+        	}).then ((actualdata) =>{
+        		let sortDirection = false;
+
+        		// Extracting a particular Field from json file:
+        		const help = actualdata;
+				const help_primary = actualdata;
+				console.log(help_primary);
+        		//
+        		window.onload = () => {
+        			loadTableData(tableData);
+
+        		};
+        		
+        		loadTableData(help);
+
+        		function loadTableData(help){
+        			const tableBody = document.getElementById('tableData');
+        			let dataHtml = '';
+
+        			for(let datac of help){
+        				dataHtml += `<tr><td>${datac.title}</td><td>${datac.link}</td></tr>`;
+        			}
+        			console.log(dataHtml)
+
+        			tableBody.innerHTML = dataHtml;
+        		}
+
+        		function sortColumn(columnName)
+        		{
+        			const dataType = typeof help[0][columnName];
+        			console.log(dataType)
+        			sortDirection = !sortDirection;
+
+
+        		}
+
+        		//document.getElementById('i1').innerHTML = helptostring;
+        		
+        	}).catch((error) =>{
+        		console.log(`The Error: ${error}`);
+        
+			});
+        </script>
+
+    <body>
+
+		<header class="text-gray-700 body-font">
+			<div
+			  class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+			>
+			  <a
+				class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+			  >
+				<svg
+				  xmlns="http://www.w3.org/2000/svg"
+				  fill="none"
+				  stroke="currentColor"
+				  stroke-linecap="round"
+				  stroke-linejoin="round"
+				  stroke-width="2"
+				  class="w-10 h-10 text-white p-2 bg-teal-500 rounded-full"
+				  viewBox="0 0 24 24"
+				>
+				  <path
+					d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+				  ></path>
+				</svg>
+				<span class="ml-3 text-xl text-white">COVID APP</span>
+			  </a>
+			  <nav
+				class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center"
+			  >
+				<a class="mr-5 hover:text-gray-400 text-white" href="index.html"
+				  >HOME</a
+				>
+				<a class="mr-5 hover:text-gray-400 text-white" href="#">BLOG</a>
+				<a class="mr-5 hover:text-gray-400 text-white" href="about.html"
+				  >ABOUT</a
+				>
+			  </nav>
+			  <button
+				class="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0"
+			  >
+				ADD YOUR INFO
+				<svg
+				  fill="none"
+				  stroke="currentColor"
+				  stroke-linecap="round"
+				  stroke-linejoin="round"
+				  stroke-width="2"
+				  class="w-4 h-4 ml-1"
+				  viewBox="0 0 24 24"
+				>
+				  <path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			  </button>
+			</div>
+		  </header>
+    	
+                
+    			<table class="w-full text-base">
+    				<thead class="font-mono text-lg text-white text-center">
+    					<tr>
+                            <th class="w-1/5 bg-gray-900 text-center border border-gray-700 font-normal px-4 py-4">
+                                <div class="uppercase tracking-wide font-bold text-gray-300">Notification Title</div></th>
+                            <th onclick="sortColumn(`number`)" class="w-1/5 bg-gray-900 text-center border border-gray-700 font-normal px-4 py-4">
+                            <div class="uppercase tracking-wide font-bold text-gray-300">
+                                Links</th>
+                            </div>
+    					</tr>
+    				</thead>
+
+    				<tbody id="tableData" class="font-mono text-lg text-white text-center">
+    					
+    				</tbody>
+                </table>
+            
+
+    		
+    	<!--	<h1 id="i1"></h1> -->
+    </body>
+</html>
